@@ -1,0 +1,29 @@
+framework:
+    workflows:
+        project:
+            type: 'state_machine'
+            marking_store:
+                type: single_state
+                arguments:
+                    - status
+            supports:
+                - App\Project\Project
+            places:
+                - 'completion_in_progress'
+                - 'to_validate'
+                - 'validated'
+                - 'pending_search'
+                - 'found'
+            transitions:
+                to_validate:
+                    from: 'completion_in_progress'
+                    to: 'to_validate'
+                validated:
+                    from: 'to_validate'
+                    to:   'validated'
+                pending_search:
+                    from: 'validated'
+                    to:   'pending_search'
+                found:
+                    from: 'pending_search'
+                    to:   'found'
