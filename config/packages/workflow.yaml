@@ -12,8 +12,7 @@ framework:
                 - 'completion_in_progress'
                 - 'to_validate'
                 - 'validated'
-                - 'pending_search'
-                - 'found'
+                - 'aborted'
             transitions:
                 to_validate:
                     from: 'completion_in_progress'
@@ -21,9 +20,7 @@ framework:
                 validated:
                     from: 'to_validate'
                     to:   'validated'
-                pending_search:
-                    from: 'validated'
-                    to:   'pending_search'
-                found:
-                    from: 'pending_search'
-                    to:   'found'
+                aborted:
+                    from: ['completion_in_progress', 'validated']
+                    to:   'aborted'
+
